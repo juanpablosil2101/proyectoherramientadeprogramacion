@@ -1,0 +1,90 @@
+@import "tailwindcss";
+
+@theme inline {
+  /* Brand palette */
+  --color-obsidian: #0a0805;
+  --color-espresso: #1a0f08;
+  --color-roast: #2d1a0e;
+  --color-mahogany: #4a2c1a;
+  --color-caramel: #8b5e3c;
+  --color-cream: #e8d5b7;
+  --color-latte: #f5e6c8;
+  --color-gold: #c9a84c;
+  --color-gold-light: #e8c76a;
+  --color-mist: #f0ece4;
+
+  /* Typography */
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-body: "Inter", system-ui, sans-serif;
+
+  /* Spacing scale extras */
+  --spacing-hero: 100vh;
+  --spacing-section: 80vh;
+}
+
+:root {
+  --bg-primary: #0a0805;
+  --bg-secondary: #1a0f08;
+  --text-primary: #f5e6c8;
+  --text-secondary: #e8d5b7;
+  --text-muted: #8b5e3c;
+  --accent: #c9a84c;
+  --accent-hover: #e8c76a;
+  --border: rgba(201, 168, 76, 0.2);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: auto; /* GSAP manages scrolling */
+  font-size: 16px;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 3px;
+}
+
+/* Selection */
+::selection {
+  background: var(--accent);
+  color: var(--bg-primary);
+}
+
+/* Smooth image rendering */
+img,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+/* Utility: hide scrollbar but keep scroll */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
