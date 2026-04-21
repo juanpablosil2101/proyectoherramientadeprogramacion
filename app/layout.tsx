@@ -32,7 +32,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
-      <body>{children}</body>
+      {/* suppressHydrationWarning prevents false errors from browser extensions
+          that inject attributes into <body> (e.g. cz-shortcut-listen) */}
+      <body suppressHydrationWarning>{children}</body>
     </html>
   );
 }
