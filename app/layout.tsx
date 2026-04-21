@@ -31,7 +31,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
+    <html lang="en" className={`${playfair.variable} ${inter.variable}`} suppressHydrationWarning>
       {/* suppressHydrationWarning prevents false errors from browser extensions
           that inject attributes into <body> (e.g. cz-shortcut-listen) */}
       <body suppressHydrationWarning>{children}</body>
