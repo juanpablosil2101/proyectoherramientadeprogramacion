@@ -16,7 +16,6 @@ export default function ParallaxBanner() {
     if (!section || !bg || !quote) return;
 
     const ctx = gsap.context(() => {
-      // Parallax: background moves slower than scroll
       gsap.to(bg, {
         yPercent: 25,
         ease: "none",
@@ -28,11 +27,10 @@ export default function ParallaxBanner() {
         },
       });
 
-      // Quote reveal
       gsap.from(quote, {
         opacity: 0,
-        y: 50,
-        duration: 1,
+        y: 60,
+        duration: 1.2,
         ease: "power3.out",
         scrollTrigger: {
           trigger: section,
@@ -48,48 +46,44 @@ export default function ParallaxBanner() {
     <section
       ref={sectionRef}
       className="relative overflow-hidden flex items-center justify-center"
-      style={{ height: "70vh", minHeight: "400px" }}
+      style={{ height: "80vh", minHeight: "480px" }}
     >
-      {/* Parallax background (synthetic gradient "photo") */}
+      {/* Parallax photo */}
       <div
         ref={bgRef}
-        className="absolute inset-[-20%] w-[140%]"
-        style={{
-          background: `
-            radial-gradient(ellipse at 20% 60%, rgba(201,168,76,0.12) 0%, transparent 50%),
-            radial-gradient(ellipse at 80% 30%, rgba(139,94,60,0.18) 0%, transparent 45%),
-            radial-gradient(ellipse at 50% 50%, rgba(74,44,26,0.4) 0%, transparent 70%),
-            linear-gradient(135deg, #0a0805 0%, #2d1a0e 40%, #1a0f08 70%, #0a0805 100%)
-          `,
-        }}
+        className="absolute inset-[-25%] w-[150%]"
       >
-        {/* Large decorative coffee ring */}
-        <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border-[40px] opacity-[0.04]"
-          style={{
-            width: "80vw",
-            height: "80vw",
-            maxWidth: "900px",
-            maxHeight: "900px",
-            borderColor: "var(--accent)",
-          }}
-        />
-        <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 opacity-[0.06]"
-          style={{
-            width: "50vw",
-            height: "50vw",
-            maxWidth: "600px",
-            maxHeight: "600px",
-            borderColor: "var(--accent)",
-          }}
+        <img
+          src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=2400&q=80"
+          alt="Dark espresso in a matte black cup resting on a bed of roasted beans"
+          className="w-full h-full object-cover"
+          loading="lazy"
+          decoding="async"
+          style={{ filter: "saturate(0.75) brightness(0.65)" }}
         />
       </div>
 
-      {/* Dark overlay */}
+      {/* Multi-layer overlay for depth */}
       <div
         className="absolute inset-0"
-        style={{ background: "rgba(10,8,5,0.6)" }}
+        style={{
+          background:
+            "radial-gradient(ellipse at 50% 50%, rgba(10,8,5,0.35) 0%, rgba(10,8,5,0.72) 100%)",
+        }}
+      />
+      <div
+        className="absolute inset-x-0 top-0 h-40"
+        style={{
+          background:
+            "linear-gradient(180deg, rgba(10,8,5,0.9) 0%, rgba(10,8,5,0) 100%)",
+        }}
+      />
+      <div
+        className="absolute inset-x-0 bottom-0 h-40"
+        style={{
+          background:
+            "linear-gradient(0deg, rgba(10,8,5,0.9) 0%, rgba(10,8,5,0) 100%)",
+        }}
       />
 
       {/* Quote content */}
@@ -97,17 +91,24 @@ export default function ParallaxBanner() {
         ref={quoteRef}
         className="relative z-10 text-center px-8 md:px-16 max-w-4xl mx-auto"
       >
-        <div
-          className="text-6xl mb-6 opacity-20"
-          style={{ color: "var(--accent)", fontFamily: "var(--font-display)" }}
+        <span
+          className="block text-[5rem] leading-none mb-4 opacity-25"
+          style={{
+            color: "var(--accent)",
+            fontFamily: "var(--font-display)",
+          }}
+          aria-hidden
         >
           &ldquo;
-        </div>
+        </span>
         <blockquote
-          className="text-2xl md:text-4xl lg:text-5xl font-bold leading-tight"
+          className="font-bold leading-tight"
           style={{
             fontFamily: "var(--font-display)",
             color: "var(--text-primary)",
+            fontSize: "clamp(1.75rem, 5vw, 4.5rem)",
+            letterSpacing: "-0.02em",
+            textShadow: "0 20px 60px rgba(0,0,0,0.5)",
           }}
         >
           Coffee is not a drink.
@@ -117,7 +118,7 @@ export default function ParallaxBanner() {
           </span>
         </blockquote>
         <cite
-          className="block mt-8 text-xs tracking-[0.5em] uppercase not-italic opacity-50"
+          className="block mt-8 text-[10px] tracking-[0.6em] uppercase not-italic opacity-50"
           style={{ color: "var(--text-secondary)" }}
         >
           — Obsidian Coffee, Since 2019

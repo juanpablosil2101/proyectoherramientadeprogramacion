@@ -1,327 +1,247 @@
-# Prompt de Ingeniería — Sitio Web de Café Premium con Animaciones de Scroll
+# Prompt Engineering — Premium Coffee Website with Cinematic Scroll Photography
 
-> **Propósito:** Este documento es un prompt listo para usar en Cursor, Lovable, v0, Claude u otras herramientas de IA generativa. Describe con precisión profesional cómo reproducir una landing page de café premium con animaciones de scroll modernas.
-
----
-
-## INSTRUCCIÓN PRINCIPAL
-
-```
-Eres un senior front-end engineer y creative director especializado en experiencias
-interactivas de nivel Awwwards. Tu dominio incluye GSAP ScrollTrigger, animaciones
-scroll-driven con Canvas API, y diseño web premium para marcas de lujo.
-
-Construye una landing page completa para "OBSIDIAN COFFEE", una marca de café
-specialty premium. La experiencia debe reproducir el nivel de polishment visual
-de Apple.com, Onyx Coffee Lab, o Blue Bottle Coffee.
-```
+> **Version 2.0 — "Innovation Leader" redesign**
+>
+> Reemplaza la versión inicial (Canvas sintético). Esta revisión abraza **fotografía real**, **navegación flotante con respiración generosa**, y un lenguaje visual editorial 2025 digno del portafolio de una consultora de innovación (R/GA, Wolff Olins, Instrument, Stink Studios).
 
 ---
 
-## ROL Y EXPERIENCIA REQUERIDA
+## 0 · Manifiesto
 
-```
-ROLE: Senior Front-End Engineer + Creative Director
-EXPERTISE:
-- Next.js 14 (App Router) con TypeScript
-- GSAP 3 + ScrollTrigger (scroll-driven animations)
-- Canvas API (animación frame-by-frame estilo Apple)
-- Framer Motion (micro-interacciones de UI)
-- Tailwind CSS (sistema de diseño)
-- Diseño premium dark-mode con paleta cálida
+> "Un sitio web premium no es un catálogo. Es **una obra**. Cada píxel debe sentirse intencional, cada transición coreografiada, cada imagen irreemplazable. Cuando el usuario aterriza, debe pausar. Cuando hace scroll, debe respirar. Cuando se va, debe recordarlo."
 
-STANDARD: Producción real, sin placeholders, sin TODOs.
-           Zero layout shift, 60fps en animaciones.
-```
+Este proyecto apuesta por:
+
+- **Fotografía real** de café (granos, tazas, vapor, textiles, granos tostados) por encima de ilustraciones, emojis o gradientes sintéticos.
+- **Cinemática en la transición vertical**: el héroe es una secuencia de fotografías que hacen crossfade y escalan con el scroll — emulando el rodaje de un reel de alta gama.
+- **Respiración espacial** en la navegación: el logo y los enlaces nunca se tocan con el borde. Se separan con padding generoso y quedan dentro de un pill flotante con glassmorphism.
+- **Tipografía editorial** con mezcla serif (Playfair Display) + grotesque moderna (Inter) y *kerning* amplio en uppercase.
+- **Jerarquía brutalista selectiva** — títulos gigantes (hasta `text-9xl`) junto a metadatos diminutos (`tracking-[0.5em]`).
 
 ---
 
-## IDENTIDAD DE MARCA
+## 1 · ROLE
 
-```
-MARCA: OBSIDIAN COFFEE
-TAGLINE: "Crafted with obsession."
-PERSONALIDAD:
-  - Sofisticado, minimalista, editorial — NO rústico ni acogedor
-  - Dark premium: casi-negro con acentos dorados cálidos
-  - Lenguaje visual: alto contraste, whitespace generoso, tipografía serif
-  - Referencias: Onyx Coffee Lab, La Colombe, Blue Bottle (tier web)
-
-AUDIENCIA OBJETIVO:
-  - Edad 28-45, amantes del café specialty
-  - Profesionales urbanos design-conscious
-  - Juzgan una marca por la calidad de su web antes de probar el producto
-
-PALETA DE COLORES:
-  --bg-primary:    #0a0805   (casi-negro con subtono cálido)
-  --bg-secondary:  #1a0f08   (superficies elevadas)
-  --text-primary:  #f5e6c8   (crema cálido)
-  --text-secondary:#e8d5b7   (texto secundario)
-  --text-muted:    #8b5e3c   (captions, labels)
-  --accent:        #c9a84c   (oro — CTA y highlights)
-  --accent-hover:  #e8c76a   (hover states)
-  --border:        rgba(201,168,76,0.2) (bordes sutiles)
-
-TIPOGRAFÍA:
-  - Display/Headings: Playfair Display (Google Fonts) — variantes italic para énfasis
-  - Body/UI: Inter (Google Fonts) — weight 300 (body), 400 (UI), 500 (labels)
-
-PRINCIPIO VISUAL: Cada píxel comunica exclusividad.
-```
+> Eres un **Director de Arte Digital Senior** en una agencia de innovación de clase mundial. Has lanzado sitios para marcas como Aesop, Blue Bottle, Stumptown y Apple. Tu estilo combina la disciplina minimalista japonesa con el maximalismo editorial europeo. Dominas Next.js 16, React 19, GSAP, Framer Motion, Tailwind CSS 4 y la dirección fotográfica.
 
 ---
 
-## STACK TECNOLÓGICO
+## 2 · PROJECT CONTEXT
 
-```
-FRAMEWORK: Next.js 14 con App Router
-LENGUAJE: TypeScript estricto
-ESTILOS: Tailwind CSS v4 + CSS custom properties en globals.css
-ANIMACIONES:
-  - GSAP 3 + ScrollTrigger: scroll horizontal, pin-scroll, parallax
-  - Canvas API (vanilla): animación frame-by-frame en el hero
-  - Framer Motion: micro-interacciones, hover effects, stagger reveals
-FUENTES: Google Fonts (Playfair Display + Inter) via next/font
+Construir el sitio público one-page de **OBSIDIAN COFFEE** — una marca ficticia de café de especialidad tostado en pequeños lotes. El sitio debe:
 
-REGLAS DE RENDIMIENTO:
-  - Solo animar transform y opacity (NUNCA width/height/top/left)
-  - will-change: transform en elementos con GPU animation
-  - Components con GSAP: "use client" + dynamic import con ssr: false
-  - ease: "none" OBLIGATORIO en scrub animations (linear = fidelidad al scroll)
-  - invalidateOnRefresh: true en todos los ScrollTrigger con valores dinámicos
-```
+- Funcionar como un **showroom digital** (no e-commerce funcional).
+- Demostrar **liderazgo de innovación** en UI/UX 2025.
+- Servir de **portafolio pieza-a-pieza**: cada sección es un experimento de scroll distinto.
+- Ser **100% responsive** (mobile 375px → desktop 1920px).
 
 ---
 
-## ESPECIFICACIONES POR SECCIÓN
+## 3 · BRAND IDENTITY
 
-### SECCIÓN 1: Hero Canvas (Animación Principal)
-```
-TÉCNICA: Canvas API — animación frame-by-frame (estilo Apple iPhone scroll)
-
-COMPORTAMIENTO:
-  - Canvas full-screen con position: sticky dentro de un contenedor 2× viewport height
-  - Al hacer scroll dentro del hero zone (0–100vh scrollTop), el canvas dibuja
-    progresivamente frames animados: index = Math.round(progress × (totalFrames-1))
-  - El dibujo usa Canvas 2D API para renderizar:
-    * Fondo oscuro con gradiente que evoluciona de negro puro a sepia cálido
-    * Silueta de una taza de espresso que crece en tamaño y detalle
-    * Vapor que sube (5 curvas bezier ondulantes)
-    * Granos de café flotando hacia arriba
-    * Resplandor ambiental radial desde la taza
-  - Frame 0: pantalla completamente oscura con taza invisible
-  - Frame 89 (final): taza completa, vapor visible, glow dorado
-
-OVERLAYS:
-  - Headline inicial ("Obsidian / Coffee") se desvanece al comenzar el scroll
-  - Tagline final ("Crafted with / obsession.") aparece cuando progress > 0.75
-  - Progress bar dorada en la parte inferior (width = scrollProgress × 100%)
-  - Nav bar fija con logo y enlaces de navegación
-
-HOOK: useCanvasScroll(canvasRef, totalFrames = 90)
-  - useEffect con scroll listener (passive: true)
-  - requestAnimationFrame para renderizado
-  - Cleanup correcto de event listeners
-```
-
-### SECCIÓN 2: Product Showcase (Scroll Horizontal)
-```
-TÉCNICA: GSAP ScrollTrigger con pin: true
-
-COMPORTAMIENTO:
-  - Sección se ancla (pin) mientras el usuario hace scroll
-  - El track flex se desliza horizontalmente: gsap.to(track, { x: -totalScroll })
-  - scrub: 1.2 (lag suave y cinematográfico)
-  - end: () => '+=' + totalScroll (dinámico para resize)
-  - Primer panel: Panel introductorio con headline editorial y hint de dirección
-  - Paneles 2-5: Tarjetas de producto con borde dorado sutil
-
-CONTENIDO DE CADA TARJETA:
-  - Número de índice (01, 02...) gigante en background con opacity: 0.05
-  - Emoji del tipo de café (☕🥛🧊🫖)
-  - Origen (ej: "Ethiopia · Yirgacheffe")
-  - Nombre del producto
-  - Descripción 2 líneas
-  - Notas de cata como chips/tags
-  - Precio en Playfair Display + botón "Order"
-
-PRODUCTOS: Signature Espresso, Velvet Latte, Cold Brew Noir, Batch Ceremony
-```
-
-### SECCIÓN 3: Origin Story (Pin-Scroll con Text Reveal)
-```
-TÉCNICA: GSAP ScrollTrigger pin + word-by-word color animation
-
-COMPORTAMIENTO:
-  - Sección anclada mientras el texto se revela
-  - 27 palabras del párrafo principal, cada una como <span class="word">
-  - Al hacer scroll, cada palabra transiciona de:
-    color: rgba(139,94,60,0.4) → color: var(--text-primary)
-    opacity: 0.1 → opacity: 1
-  - stagger: 0.04 aplicado con scrub: 0.8
-  - Panel izquierdo: decoración visual (imagen sintética con CSS gradients)
-  - Panel derecho: texto animado + párrafo de soporte
-
-ESTADÍSTICAS (con animación scroll-reveal):
-  - 12 Origin Countries
-  - 48h Max Roast-to-Cup
-  - 94° Brew Temperature
-  - 28s Espresso Pull
-  (Grid 2×2 en la parte inferior, borde dorado entre celdas)
-```
-
-### SECCIÓN 4: Parallax Banner (Separador Visual)
-```
-TÉCNICA: GSAP ScrollTrigger parallax + quote reveal
-
-COMPORTAMIENTO:
-  - Sección 70vh de altura
-  - Background: div oversize (140% width/height) con CSS gradient premium
-    que incluye anillos decorativos de café (circles con opacity: 0.04-0.06)
-  - Background se mueve a 25% de la velocidad del scroll (yPercent: 25)
-  - Cita de marca con fade-in + translateY al entrar al viewport
-
-CONTENIDO:
-  - Comilla decorativa gigante en Playfair Display (opacity: 0.2)
-  - Quote: "Coffee is not a drink. It is a state of mind."
-  - Atribución: "— Obsidian Coffee, Since 2019"
-```
-
-### SECCIÓN 5: Menu Grid (Framer Motion Stagger)
-```
-TÉCNICA: Framer Motion whileInView + staggerChildren
-
-COMPORTAMIENTO:
-  - Grid CSS: 1 col mobile, 2 col tablet, 3 col desktop
-  - containerVariants: staggerChildren: 0.07
-  - cardVariants: hidden { opacity: 0, y: 40 } → visible { opacity: 1, y: 0 }
-  - duration: 0.6, ease: [0.22, 1, 0.36, 1] (exponential out)
-  - Hover: whileHover scale 1.02 + gold underline que crece desde la izquierda
-  - Cada card tiene una barra dorada bottom que se anima con scaleX: 0→1 en hover
-
-ITEMS (9 en total, 3 categorías):
-  Espresso: Ristretto, Lungo
-  Milk: Flat White, Cortado
-  Filter: V60 Pour-Over, AeroPress
-  Cold: Nitro Cold Brew, Shakerato
-  Seasonal: Honey Latte
-
-  Cada item: category tag, nombre, descripción 1 línea, precio, "→ Add"
-```
-
-### SECCIÓN 6: Footer
-```
-ESTRUCTURA:
-  - Newsletter CTA: headline 2 líneas + email input + botón "Subscribe"
-  - Links grid: Brand description + 3 columnas (Coffee, Visit, Connect)
-  - Social: botones IG/TW/YT como text-only con borde dorado sutil
-  - Bottom bar: copyright + privacy/terms links
-
-ANIMACIONES:
-  - Newsletter section: fade-in stagger con Framer Motion whileInView
-  - Hover en links: opacity 50% → 100%
-  - Hover en social icons: border color → accent, text color → accent
-```
+| Atributo | Valor |
+|---|---|
+| Nombre | **OBSIDIAN COFFEE** |
+| Tono | Monástico, obsesivo, ceremonial |
+| Audiencia | Entusiastas de café, early adopters, diseñadores |
+| Paleta | Negro obsidiana `#0a0805`, crema `#f5e6c8`, dorado ceremonial `#c9a84c`, caoba `#4a2c1a` |
+| Tipografía | **Playfair Display** (display, titulares, números) + **Inter** (body, UI, tags) |
+| Voz | Afirmativa, sobria, poética sin ser cursi |
+| Lema | *"Crafted with obsession."* |
 
 ---
 
-## ARQUITECTURA DE ARCHIVOS
+## 4 · TECHNICAL REQUIREMENTS
+
+- **Next.js 16** con App Router y Turbopack.
+- **React 19**, TypeScript strict.
+- **Tailwind CSS 4** con sintaxis `@import "tailwindcss"` y `@theme inline`.
+- **GSAP 3 + ScrollTrigger** para pin, scrub horizontal y parallax.
+- **Framer Motion 12** para micro-interacciones (hover, stagger, reveals).
+- **Fotografía real vía Unsplash** (URLs estables `images.unsplash.com/photo-XXXX?auto=format&fit=crop&w=...&q=80`).
+- **Imágenes con `<img>` nativo** para evitar configurar `remotePatterns` en `next.config.ts`. Usar `loading="lazy"`, `decoding="async"` y `fetchPriority` apropiado.
+- **Todos los componentes interactivos cargados con `next/dynamic({ ssr: false })`** desde un Client Component (`app/page.tsx` con `"use client"`). Esto elimina mismatches de hidratación.
+- **`suppressHydrationWarning`** en `<html>` y `<body>` para tolerar atributos inyectados por extensiones.
+
+---
+
+## 5 · VISUAL DESIGN SPECIFICATIONS
+
+### 5.1 Navegación — Floating Pill
+
+**Regla de oro**: el navbar nunca se pega al borde. Flota con padding externo generoso.
 
 ```
-app/
-├── layout.tsx          # Playfair Display + Inter via next/font, metadata SEO
-├── page.tsx            # Composición: dynamic imports para HeroCanvas y ProductShowcase
-└── globals.css         # CSS variables + Tailwind @theme inline
+    ┌─────────────────────────────────────────────────┐
+    │  OBSIDIAN •      Menu  Story  Journal  ORDER →  │   <- top-6 md:top-8
+    └─────────────────────────────────────────────────┘
+    ↑ mx-4 md:mx-8 lg:mx-12                          ↑
+```
 
-components/
-├── HeroCanvas/
-│   ├── index.tsx       # Canvas sticky + overlays + progress bar
-│   └── useCanvasScroll.ts  # Hook: scroll listener → frame index → drawFrame()
-├── ProductShowcase/
-│   └── index.tsx       # GSAP horizontal scroll con pin
-├── OriginStory/
-│   └── index.tsx       # GSAP pin + word color animation
-├── MenuGrid/
-│   └── index.tsx       # Framer Motion stagger grid
-├── ParallaxBanner/
-│   └── index.tsx       # GSAP parallax + quote
-└── Footer/
-    └── index.tsx       # Newsletter + links + bottom bar
+- **Posición**: `fixed top-6 md:top-8 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-6xl`.
+- **Background**: `rgba(10,8,5,0.55)` + `backdrop-filter: blur(20px) saturate(1.8)`.
+- **Border**: `1px solid rgba(201,168,76,0.18)`.
+- **Radius**: `rounded-full` en estado base.
+- **Padding interno**: `px-6 py-3` (base) / `px-8 py-4` (scrolled).
+- **CTA "Order"**: pill dorado sólido con hover shift.
+- **Indicador de scroll**: barra dorada de 1px como progreso de lectura.
 
-lib/
-└── gsap.ts             # Registro seguro de plugins (singleton, solo client)
+### 5.2 Tipografía Jerárquica
+
+| Uso | Font | Size | Tracking | Weight |
+|---|---|---|---|---|
+| H1 héroe | Playfair Display | `clamp(4rem, 12vw, 12rem)` | `-0.04em` | 700 |
+| H2 sección | Playfair Display | `clamp(2.5rem, 6vw, 6rem)` | `-0.02em` | 700 |
+| Eyebrow label | Inter | `0.75rem` | `0.5em` uppercase | 500 |
+| Body | Inter | `1rem` / `1.125rem` | normal | 400 |
+| Metadato | Inter | `0.75rem` | `0.3em` uppercase | 400 |
+
+### 5.3 Paleta Aplicada
+
+- Fondo principal: `#0a0805` (obsidiana).
+- Fondo alterno: `#1a0f08` (espresso).
+- Texto primario: `#f5e6c8` (latte cream).
+- Texto secundario: `#e8d5b7` (opacity 60-80%).
+- Acento: `#c9a84c` (dorado ceremonial).
+- Borde sutil: `rgba(201,168,76,0.12-0.2)`.
+
+### 5.4 Espaciado
+
+- Secciones: `py-24 md:py-32 lg:py-40`.
+- Contenido: `px-8 md:px-16 lg:px-24`.
+- Máximo ancho de lectura: `max-w-5xl mx-auto` para texto; `max-w-[1600px]` para composición.
+
+---
+
+## 6 · ANIMATION SPECIFICATIONS
+
+### 6.1 HeroShowcase (reemplaza HeroCanvas)
+
+Es el corazón del sitio. Reemplaza el Canvas sintético por una secuencia de fotografías reales que:
+
+1. **3-4 imágenes de café apiladas** en `position: absolute`.
+2. El contenedor padre mide `300vh` — genera pista de scroll.
+3. El contenedor hijo es `sticky top-0 h-screen`.
+4. Cada imagen tiene una ventana de `scrollYProgress` donde está visible (ej. imagen A: 0-0.40, B: 0.30-0.70, C: 0.60-1.0) con solapamiento para crossfade suave.
+5. **Transformaciones por scroll**:
+   - `scale`: `1.15 → 1.0 → 0.92` según su fase (entra expandida, se estabiliza, se reduce al salir).
+   - `opacity`: curva triangular `0 → 1 → 0` con suavizado cosenoidal.
+   - Tint `filter: brightness() saturate()` dinámico.
+6. **Texto superpuesto**: Huge typographic overlay (`OBSIDIAN / COFFEE`) con `mix-blend-mode: difference` o contraste sólido que:
+   - Se desvanece con `opacity = 1 - progress * 2.5`.
+   - Sube con `translateY(-progress * 80px)`.
+7. **Al final (progress > 0.85)**: revela el tagline *"Crafted with obsession"* con CTA "Explore Menu".
+
+**Fórmula de opacidad por imagen** (triangular con overlap `o`):
+
+```
+start = i / N - o
+end   = (i + 1) / N + o
+t = (p - start) / (end - start)
+opacity = smoothstep(0, 1, min(2t, 2(1-t)))
+```
+
+### 6.2 ProductShowcase (scroll horizontal)
+
+GSAP ScrollTrigger con `pin: true`, scroll vertical mapeado a traducción horizontal. Panel de introducción + 4 tarjetas con imagen real de producto (cover 3:4).
+
+### 6.3 OriginStory (text reveal)
+
+Pin + reveal palabra por palabra con `stagger: 0.04`. Imagen lateral fotográfica real (sacos de yute / granos verdes) con parallax sutil.
+
+### 6.4 MenuGrid
+
+Grid 3x3 con Framer Motion `staggerChildren: 0.07`. Cards con foto de fondo al 30% opacidad, hover eleva y satura la imagen.
+
+### 6.5 ParallaxBanner
+
+Imagen real a pantalla completa, parallax con GSAP (`yPercent: 25, scrub: true`), overlay oscuro, cita superpuesta.
+
+---
+
+## 7 · SECTIONS TO IMPLEMENT
+
+| # | Sección | Técnica principal | Imagen clave |
+|---|---|---|---|
+| 1 | `Navbar` | `fixed`, glassmorphism, scroll-reactive | — |
+| 2 | `HeroShowcase` | Crossfade de 3 fotos + scale-on-scroll | Vertido / granos / sacos |
+| 3 | `ProductShowcase` | Horizontal scroll pinned (GSAP) | 4 tazas reales |
+| 4 | `OriginStory` | Pin + stagger text reveal | Sacos de yute con granos |
+| 5 | `ParallaxBanner` | Parallax background | Taza negra sobre granos |
+| 6 | `MenuGrid` | Framer Motion stagger grid | 9 tarjetas con fondo foto |
+| 7 | `Footer` | Newsletter + links | — |
+
+---
+
+## 8 · PHOTOGRAPHY DIRECTION
+
+**Briefing (o selección Unsplash):**
+
+- Iluminación cálida, low-key (luz lateral rasante).
+- Tonos ámbar/caoba/crema dominantes.
+- Texturas: granos tostados, vapor, leche vertida, yute, madera, cerámica mate.
+- **Evitar**: cafés con sirope comerciales, latte art genérico, tazas blancas estándar de stock.
+- Proporciones: vertical 3:4 para lateral, 16:9 para banners, 1:1 para cards.
+
+**Formato URL**: `https://images.unsplash.com/{photo-id}?auto=format&fit=crop&w=1920&q=80`
+
+---
+
+## 9 · DELIVERABLES
+
+1. **Código fuente Next.js** en la rama `claude/coffee-scroll-animation-t3NGh`.
+2. **`prompt-engineering.md`** (este documento).
+3. **Build exitoso** con `npm run build`.
+4. **Responsive verificado** en 375px, 768px, 1440px.
+5. **60fps durante scroll** en hardware moderno.
+
+---
+
+## 10 · CONSTRAINTS
+
+- ❌ **No emojis** en la UI final.
+- ❌ **No gradientes sintéticos** reemplazando imágenes en secciones clave.
+- ❌ **No animaciones decorativas** sin propósito narrativo.
+- ❌ **No mostrar loaders**: las imágenes críticas hacen preload.
+- ✅ **Sí fotografía real** en cada bloque visual principal.
+- ✅ **Sí whitespace generoso**: la respiración es parte del lujo.
+- ✅ **Sí accesibilidad**: `alt` descriptivo, foco visible, `prefers-reduced-motion` respetado.
+
+---
+
+## 11 · PROMPT LISTO PARA USAR (copia y pega en Cursor / v0 / Claude Code)
+
+```
+ROLE: Senior Digital Art Director at a world-class innovation agency.
+
+TASK: Build a premium one-page website for OBSIDIAN COFFEE — a fictional specialty coffee brand — using Next.js 16 (App Router, Turbopack), React 19, TypeScript, Tailwind CSS 4, GSAP 3, and Framer Motion 12.
+
+SECTIONS (in order):
+1. Floating glassmorphic Navbar (top-8, centered pill, backdrop-blur-xl, rounded-full, Order CTA pill).
+2. HeroShowcase — sticky 300vh section with 3 real coffee photos that crossfade and scale with scroll. Huge typographic overlay "OBSIDIAN / COFFEE" that fades out. Reveals tagline + CTA at scroll end.
+3. ProductShowcase — GSAP horizontal pin-scroll with 4 product cards, each with a real Unsplash photo (cover, 3:4).
+4. OriginStory — pinned section with word-by-word text reveal (stagger 0.04) and a lateral 3:4 real photo of burlap coffee sacks.
+5. ParallaxBanner — full-bleed real photo with GSAP parallax (yPercent: 25), brand quote overlaid.
+6. MenuGrid — 9 cards grid with real product photography as soft backdrop, Framer Motion staggerChildren 0.07.
+7. Footer — newsletter + links + social.
+
+DESIGN RULES:
+- Palette: obsidian #0a0805, cream #f5e6c8, gold #c9a84c, mahogany #4a2c1a.
+- Fonts: Playfair Display (display) + Inter (body), loaded via next/font.
+- Massive whitespace. Eyebrow labels with tracking-[0.5em] uppercase.
+- Navbar NEVER touches the viewport edges — padding outside the pill and inside it.
+- No emojis, no synthetic gradients in place of photos, no random blur.
+
+TECHNICAL RULES:
+- All interactive sections loaded via next/dynamic({ ssr: false }) from a "use client" page.
+- suppressHydrationWarning on <html> and <body>.
+- Use native <img> tags with Unsplash URLs (photo-XXXX?auto=format&fit=crop&w=1920&q=80) to avoid next/image remotePatterns config.
+- Register GSAP plugins only on the client; clean up ScrollTriggers in useEffect return.
+- Respect prefers-reduced-motion.
+
+DELIVERABLE: the full codebase, ready to run with `npm run dev`.
 ```
 
 ---
 
-## REGLAS CRÍTICAS DE IMPLEMENTACIÓN
-
-```
-SCROLL ANIMATIONS:
-  1. ease: "none" SIEMPRE en animaciones con scrub (no-negociable)
-  2. invalidateOnRefresh: true en todos los ScrollTrigger con end dinámico
-  3. GSAP solo en "use client" components, registrar plugins en singleton
-  4. dynamic import con ssr: false para componentes con GSAP o Canvas
-
-CANVAS:
-  5. Canvas debe redimensionarse en window resize con listener passive
-  6. Usar requestAnimationFrame para renderizado (nunca draw sync)
-  7. drawFrame() debe ser pura: recibe ctx + frame data, no accede a state
-
-PERFORMANCE:
-  8. No animar width/height/top/left — SOLO transform y opacity
-  9. will-change: transform en Canvas y elementos de scroll horizontal
-  10. Cleanup completo en useEffect return: removeEventListener + cancelAnimationFrame
-
-NEXT.JS:
-  11. Componentes con GSAP: "use client" + dynamic(() => import(...), { ssr: false })
-  12. Fuentes: next/font/google, no @import en CSS
-  13. Metadata completa en layout.tsx (title, description, openGraph)
-```
-
----
-
-## TESTING Y VERIFICACIÓN
-
-```bash
-# Desarrollo
-npm run dev           # Servidor en localhost:3000
-
-# Verificación de build
-npm run build         # No debe haber errores TypeScript ni de build
-
-# Checklist manual:
-□ Canvas: al hacer scroll lentamente en el hero, los frames se animan suavemente
-□ Canvas: al hacer scroll hacia arriba, los frames se revierten
-□ Horizontal: las tarjetas de producto se desplazan al hacer scroll en esa sección
-□ Horizontal: el pin se libera cuando el último panel está completamente visible
-□ OriginStory: las palabras cambian de color una a una al hacer scroll
-□ Parallax: el fondo del banner se mueve más lento que el scroll
-□ MenuGrid: las cards aparecen con stagger al entrar al viewport
-□ Footer: el newsletter y los links se revelan con fade-in
-□ Responsive: funciona correctamente en 375px (mobile) y 1440px (desktop)
-□ No hay console errors en ninguna sección
-```
-
----
-
-## NOTAS DE EXTENSIÓN
-
-Para añadir video real en lugar del Canvas generativo:
-
-```
-Reemplaza HeroCanvas con una versión que usa <video>:
-  - <video muted playsinline preload="auto"> con src de tu video
-  - En useCanvasScroll, cambia el canvas por scrubbing de video:
-    video.currentTime = progress * video.duration
-  - FFmpeg para encoding óptimo de scrubbing:
-    ffmpeg -i input.mp4 -vf scale=1920:-1 -movflags faststart
-           -vcodec libx264 -profile:v baseline -crf 22 -g 2
-           -pix_fmt yuv420p -an hero-scrub.mp4
-  - iOS Safari fallback: video.play().then(() => video.pause())
-    antes del scroll listener para "desbloquear" el decoder
-```
-
----
-
-*Generado con Claude Code — Anthropic. Branch: claude/coffee-scroll-animation-t3NGh*
+**Fin del documento.** Ver `components/` para la implementación real de cada sección.

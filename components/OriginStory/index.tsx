@@ -118,47 +118,47 @@ export default function OriginStory() {
 
       <div className="relative z-10 min-h-screen flex flex-col lg:flex-row items-center gap-16 px-8 md:px-16 lg:px-24 py-24">
         {/* Left: label + image accent */}
-        <div className="flex-shrink-0 lg:w-1/3 flex flex-col gap-6">
+        <div className="flex-shrink-0 lg:w-2/5 flex flex-col gap-6">
           <p
-            className="text-xs tracking-[0.5em] uppercase"
+            className="text-[10px] md:text-xs tracking-[0.5em] uppercase"
             style={{ color: "var(--accent)" }}
           >
-            Our Origin
+            Our Origin · Since 2019
           </p>
           <div
-            className="w-full max-w-xs aspect-[3/4] relative overflow-hidden"
+            className="w-full max-w-md aspect-[3/4] relative overflow-hidden rounded-[2px]"
             ref={imageOverlayRef}
+            style={{
+              boxShadow:
+                "0 60px 120px -40px rgba(0,0,0,0.8), 0 0 0 1px rgba(201,168,76,0.08) inset",
+            }}
           >
-            {/* Synthetic image: layered canvas art replacement */}
+            <img
+              src="https://images.unsplash.com/photo-1559525839-d9acfd27edda?auto=format&fit=crop&w=1600&q=80"
+              alt="Burlap sacks of green coffee beans stacked at an origin farm"
+              className="absolute inset-0 w-full h-full object-cover"
+              loading="lazy"
+              decoding="async"
+            />
             <div
               className="absolute inset-0"
               style={{
-                background: `
-                  radial-gradient(ellipse at 30% 20%, rgba(201,168,76,0.15) 0%, transparent 60%),
-                  radial-gradient(ellipse at 70% 80%, rgba(139,94,60,0.2) 0%, transparent 50%),
-                  linear-gradient(160deg, #1a0f08 0%, #0a0805 50%, #2d1a0e 100%)
-                `,
+                background:
+                  "linear-gradient(180deg, rgba(10,8,5,0.1) 0%, rgba(10,8,5,0) 35%, rgba(10,8,5,0.88) 100%)",
               }}
             />
             <div
-              className="absolute inset-0 flex items-center justify-center"
-              style={{ fontSize: "100px", opacity: 0.12 }}
-            >
-              ☕
-            </div>
-            {/* Corner accent lines */}
-            <div
-              className="absolute top-4 left-4 w-12 h-12 border-t border-l"
+              className="absolute top-5 left-5 w-12 h-12 border-t border-l"
               style={{ borderColor: "var(--accent)" }}
             />
             <div
-              className="absolute bottom-4 right-4 w-12 h-12 border-b border-r"
+              className="absolute bottom-5 right-5 w-12 h-12 border-b border-r"
               style={{ borderColor: "var(--accent)" }}
             />
             <div className="absolute bottom-6 left-0 right-0 text-center">
               <p
-                className="text-xs tracking-widest uppercase"
-                style={{ color: "var(--accent)", opacity: 0.7 }}
+                className="text-[10px] md:text-xs tracking-[0.5em] uppercase"
+                style={{ color: "var(--accent)" }}
               >
                 Single Origin
               </p>
